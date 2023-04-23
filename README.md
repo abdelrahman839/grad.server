@@ -1,4 +1,4 @@
-# HAAI Server Side (Backend)
+# Fly Server Side (Backend)
 
 Fly Server Side is a nodejs project that uses express framework to develop REST-APIs that communicate with MongoDB Through Mongoose library.
 
@@ -43,9 +43,9 @@ Merge requests are welcomed to the dev Branch.
 
 ## Useful Links
 
-[Live]()
+[Live](https://fly-tbum.onrender.com/)
 
-[Backend Documentation](https://documenter.getpostman.com/view/16108070/VVQVbpAZ)
+[Backend Documentation](https://documenter.getpostman.com/view/16108070/2s93Y5PKmZ)
 
 ## Credits
 
