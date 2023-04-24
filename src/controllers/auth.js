@@ -73,7 +73,7 @@ const getData = async (req, res) => {
                 email: user.email,
                 gender: user.gender,
             });
-        }else {
+        } else {
             res.status(404).json({
                 message: "User not found"
             });
@@ -85,10 +85,51 @@ const getData = async (req, res) => {
     }
 }
 
+const update = async (req, res) => {
+    try {
+        const { userId } = req.token;
+        const user = await User.findOneAndUpdate({ _id: userId }, req.body);
+        if (user) {
+            res.status(200).json({
+                message: "success"
+            });
+        } else {
+            res.status(404).json({
+                message: "User not found"
+            });
+        }
+    } catch (error) {
+        res.status(500).json({
+            error: "Internal Server Error"
+        })
+    }
+}
 
-
+const updatePass = async (req, res) => {
+    try {
+        const { userId } = req.token;
+        const { password } = req.body;
+        const newPass = await bcrypt.hash(password, Number(process.env.SALT_RAUNDS));
+        const user = await User.findOneAndUpdate({ _id: userId }, { password: newPass });
+        if (user) {
+            res.status(200).json({
+                message: "success"
+            });
+        } else {
+            res.status(404).json({
+                message: "User not found"
+            });
+        }
+    } catch (error) {
+        res.status(500).json({
+            error: "Internal Server Error"
+        })
+    }
+}
 module.exports = {
     register,
     signIn,
     getData,
+    updatePass,
+    update,
 }
