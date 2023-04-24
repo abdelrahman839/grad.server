@@ -61,15 +61,19 @@ const signIn = async (req, res) => {
     }
 }
 
-const deleteAcc = async (req, res) => {
+const getData = async (req, res) => {
     try {
-        const { email } = req.token;
-        const user = await User.findOneAndDelete({ email });
+        const { userId } = req.token;
+        const user = await User.findOne({ _id: userId });
         if (user) {
             res.status(200).json({
-                message: "The account has been deleted successfully"
+                firstName: user.firstName,
+                lastName: user.lastName,
+                phone: user.phone,
+                email: user.email,
+                gender: user.gender,
             });
-        } else {
+        }else {
             res.status(404).json({
                 message: "User not found"
             });
@@ -81,8 +85,10 @@ const deleteAcc = async (req, res) => {
     }
 }
 
+
+
 module.exports = {
     register,
     signIn,
-    deleteAcc,
+    getData,
 }
